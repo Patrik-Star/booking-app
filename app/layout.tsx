@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer";
 import TopNavigationBar from "@/components/navigation/top-navigation-bar";
 import SideNavigationBar from "@/components/navigation/side-navigation-bar";
 import { Authenticated } from "convex/react";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             {children}
           </div>
           <Footer />
+          <Toaster />
         </ConvexClientProvider>
       </body>
     </html>

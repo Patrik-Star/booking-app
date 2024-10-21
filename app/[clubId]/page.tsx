@@ -4,6 +4,9 @@ import { addDays } from "date-fns"
 import { Card } from "@/components/ui/card"
 import EventCalender, { Event } from "@/components/eventCalender"
 import EventCard from "@/components/layout/eventCard"
+import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
+import { useParams, useRouter } from "next/navigation"
 
 // Mock data for events
 export const EVENTS: Event[] = [
@@ -39,17 +42,33 @@ export const EVENTS: Event[] = [
   },
 ]
 
-export default function ClubDashboard() {
+interface ClubDashboardProps {
+  params: {
+    clubId: string;
+  }
+}
+
+export default function ClubDashboard({params}: ClubDashboardProps) {
+  const router = useRouter()
+
+  const handleCreateNew = () =>  {
+    router.push(`/${params.clubId}/create`)
+  }
 
   return (
     <div className="flex h-screen flex-col">
       <main className="flex-1 overflow-auto p-4">
         <div className="flex gap-4">
           <div className="md:col-span-2 space-y-4 flex-1 w-full">
-            <h2 className="text-2xl font-bold border-b border-gray-200 pb-3">Upcoming Events</h2>
-            {EVENTS.map((event) => (
+            <div className="flex justify-start items-center border-b border-gray-200 pb-3">
+              <h2 className="text-2xl font-bold ">Upcoming Events</h2>
+              <Button variant="ghost" onClick={handleCreateNew}>
+                <Plus />
+              </Button>
+            </div>
+            {EVENTS.map((event, index) => (
               <EventCard
-                key={event.id}
+                key={index}
                 id={event.id}
                 title={event.title}
                 date={event.date}

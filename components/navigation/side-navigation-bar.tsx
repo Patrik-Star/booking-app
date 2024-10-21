@@ -7,6 +7,7 @@ import { useUser } from '@clerk/clerk-react';
 
 const sidebar_data = [
     { title: "Badminton", id: 1 },
+    { title: "PickelBall", id: 2 },
 ]
 
 export const SidebarContents = () => {
@@ -31,7 +32,7 @@ function SideNavigationBar() {
     const { isLoaded, isSignedIn } = useUser();
 
     if (!isLoaded) return null;
-    if(!isSignedIn) return null
+    if(!isSignedIn) return null;
 
     return (
         <StickySidebar className="hidden bg-blue-100 sm:block top-[calc(3.25rem+1px)] h-[calc(100vh-(3.25rem+1px))] md:w-72">
