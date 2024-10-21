@@ -12,21 +12,25 @@ import Link from "next/link";
 import Hero from "@/components/layout/hero";
 import Overview from "@/components/layout/overview";
 import Updates from "@/components/layout/updates";
+import EventCalender from "@/components/eventCalender";
+import { EVENTS } from "../[clubId]/page";
 
 
 export default function Home() {
-
   return (
-    <main className="min-h-[calc(100vh-(3.25rem+1px))]">
-      <main className="w-full flex flex-col gap-8">
-        <Hero />
-      <Overview />
-      <Updates />
+    <main className="w-full min-h-[calc(100vh-(3.25rem+1px))]">
+      <main className="w-full flex flex-col gap-8 p-5">
         <Authenticated>
-          <SignedInContent />
+          <div className="w-full flex justify-between">
+            {/* <SignedInContent /> */}
+            <Updates />
+            <EventCalender events={EVENTS}/>
+          </div>
         </Authenticated>
         <Unauthenticated>
-          <p>Click one of the buttons in the top right corner to sign in.</p>
+          <Hero />
+          <Overview />
+
         </Unauthenticated>
       </main>
     </main>
@@ -50,7 +54,7 @@ function SignedInContent() {
 
   return (
     <>
-      
+
       <p>
         <Button onClick={() => { void addNumber({ value: Math.floor(Math.random() * 10) }); }}>
           Add a random number
@@ -62,7 +66,6 @@ function SignedInContent() {
           ? "Click the button!"
           : numbers?.join(", ") ?? "..."}
       </p>
-
 
       <p>
         To build a full page layout copy one of the included{" "}

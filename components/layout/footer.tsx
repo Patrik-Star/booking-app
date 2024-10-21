@@ -1,12 +1,16 @@
-// import { se } from "@/lib/utils";
-
-// export const Footer = se("footer", "border-t");
-
 import React from 'react'
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <footer className="mb-10 px-4 text-center text-gray-500">
+      <small className="mb-2 block text-xs">
+        &copy; 2024 Patrik Bolander. All rights reserved.
+      </small>
+      <p className="text-xs">
+        <span className="font-semibold">About this website:</span> built with
+        React & Next.js, TypeScript, Tailwind CSS, Convex DB, Clerk Auth
+      </p>
+    </footer>
   )
 }
 

@@ -28,11 +28,10 @@ interface EventCardProps {
   description: string
   location: string
   maxAttendees: number
-  address: string
   price: string
 }
 
-export default function EventCard({ id, title, date, time, description, location, maxAttendees, address, price }: EventCardProps) {
+export default function EventCard({ id, title, date, time, description, location, maxAttendees, price }: EventCardProps) {
   const [attendees, setAttendees] = useState<Attendee[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -88,7 +87,6 @@ export default function EventCard({ id, title, date, time, description, location
               <p className="text-sm text-muted-foreground">
                 Location: {location}
               </p>
-              <p>Address: {address}</p>
               <p>Price: {price}</p>
             </CardDescription>
           </CardHeader>

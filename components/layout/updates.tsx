@@ -7,7 +7,7 @@ export default function Updates() {
     ];
   
     return (
-      <section className="py-16 bg-white">
+      <section className="py-10 bg-white w-full">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12">Latest Updates</h2>
           <ul className="space-y-4">

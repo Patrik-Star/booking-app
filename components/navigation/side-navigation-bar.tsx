@@ -3,13 +3,10 @@ import React from 'react'
 import { StickySidebar } from './sticky-sidebar';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
-import { Authenticated, Unauthenticated } from 'convex/react';
 import { useUser } from '@clerk/clerk-react';
 
 const sidebar_data = [
     { title: "Badminton", id: 1 },
-    { title: "club 1", id: 2 },
-    { title: "club 1", id: 3 },
 ]
 
 export const SidebarContents = () => {
@@ -31,15 +28,13 @@ export const SidebarContents = () => {
 
 
 function SideNavigationBar() {
+    const { isLoaded, isSignedIn } = useUser();
 
-    const user = useUser()
-    console.log(user);
-    if(!user.user) {
-        return null
-    }
+    if (!isLoaded) return null;
+    if(!isSignedIn) return null
 
     return (
-        <StickySidebar className="hidden bg-blue-100 sm:block top-[calc(3.25rem+1px)] h-[calc(100vh-(3.25rem+1px))]">
+        <StickySidebar className="hidden bg-blue-100 sm:block top-[calc(3.25rem+1px)] h-[calc(100vh-(3.25rem+1px))] md:w-72">
             <SidebarContents />
         </StickySidebar>
     )

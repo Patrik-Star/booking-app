@@ -1,6 +1,4 @@
 "use client"
-
-import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { addDays, format, isSameDay, isSameMonth, startOfMonth } from "date-fns"
 
@@ -12,13 +10,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useState } from "react"
 
-interface Event {
-  id: string
+export interface Event {
+  id: number
   title: string
-  datetime: Date
+  date: Date
   description: string
-  location?: string
+  location: string
+  time: string,
+  maxAttendees: number,
+  price: string
 }
 
 interface EventCalendarProps {
@@ -27,7 +29,7 @@ interface EventCalendarProps {
 }
 
 export default function EventCalendar({ events = [], className }: EventCalendarProps) {
-  const [currentMonth, setCurrentMonth] = React.useState(new Date())
+  const [currentMonth, setCurrentMonth] = useState(new Date())
 
   const firstDayOfMonth = startOfMonth(currentMonth)
   const daysInMonth = Array.from({ length: 35 }, (_, i) => addDays(firstDayOfMonth, i - firstDayOfMonth.getDay()))
@@ -36,7 +38,7 @@ export default function EventCalendar({ events = [], className }: EventCalendarP
   const goToNextMonth = () => setCurrentMonth(prev => addDays(prev, 32 - prev.getDate()))
 
   return (
-    <Card className={cn("w-[300px] p-4", className)}>
+    <Card className={cn("w-[300px] p-4 h-min", className)}>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">{format(currentMonth, "MMMM yyyy")}</h2>
         <div className="flex space-x-1">
@@ -57,12 +59,24 @@ export default function EventCalendar({ events = [], className }: EventCalendarP
         {daysInMonth.map((date, index) => {
           const isCurrentMonth = isSameMonth(date, currentMonth)
           const isToday = isSameDay(date, new Date())
-          const dayEvents = events.filter(event => isSameDay(event.datetime, date))
+          const dayEvents = events.filter(event => isSameDay(event.date, date))
           const hasEvent = dayEvents.length > 0
 
+          const [open, setOpen] = useState(false);
+
+          const handleMouseEnter = () => {
+            setOpen(true);
+          };
+
+          const handleMouseLeave = () => {
+            setOpen(false);
+          };
+
           return (
-            <Popover key={index}>
-              <PopoverTrigger asChild>
+            <Popover key={index} open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}>
                 <div
                   className={cn(
                     "aspect-square flex flex-col items-center justify-center relative cursor-pointer",
@@ -72,7 +86,7 @@ export default function EventCalendar({ events = [], className }: EventCalendarP
                 >
                   <span className="text-sm">{format(date, "d")}</span>
                   {hasEvent && (
-                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full bg-pink-500" />
                   )}
                 </div>
               </PopoverTrigger>
@@ -83,9 +97,9 @@ export default function EventCalendar({ events = [], className }: EventCalendarP
                     <ul className="space-y-2">
                       {dayEvents.map(event => (
                         <li key={event.id} className="text-sm">
-                          <span className="font-medium">{format(event.datetime, "h:mm a")}</span>
-                          <p className="text-muted-foreground">{event.location}</p>
+                          <span className="font-medium">{format(event.date, "h:mm a")}</span>
                           <p className="font-semibold">{event.title}</p>
+                          <p className="text-muted-foreground">{event.location}</p>
                           <p className="text-muted-foreground">{event.description}</p>
                         </li>
                       ))}
