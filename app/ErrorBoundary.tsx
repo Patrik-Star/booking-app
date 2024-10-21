@@ -1,5 +1,4 @@
-import { Code } from "@/components/typography/code";
-import { Link } from "@/components/typography/link";
+import Link from "next/link";
 import { Component, ReactNode } from "react";
 
 // NOTE: Once you get Clerk working you can remove this error boundary
@@ -24,10 +23,10 @@ export class ErrorBoundary extends Component<
           <>
             <p>
               Add{" "}
-              <Code>
+              <p>
                 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY={'"<your publishable key>"'}
-              </Code>{" "}
-              to the <Code>.env.local</Code> file
+              </p>{" "}
+              to the <p>.env.local</p> file
             </p>
             {clerkDashboardUrl ? (
               <p>
