@@ -60,6 +60,7 @@ export default function ClubDashboard({params}: ClubDashboardProps) {
       <main className="flex-1 overflow-auto p-4">
         <div className="flex gap-4">
           <div className="md:col-span-2 space-y-4 flex-1 w-full">
+          <h1 className="text-3xl font-bold ">Badminton</h1>
             <div className="flex justify-start items-center border-b border-gray-200 pb-3">
               <h2 className="text-2xl font-bold ">Upcoming Events</h2>
               <Button variant="ghost" onClick={handleCreateNew}>

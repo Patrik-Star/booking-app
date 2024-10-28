@@ -7,7 +7,8 @@ import { useUser } from '@clerk/clerk-react';
 
 const sidebar_data = [
     { title: "Badminton", id: 1 },
-    { title: "PickelBall", id: 2 },
+    { title: "PickleBall", id: 2 },
+    { title: "Board games", id: 2 },
 ]
 
 export const SidebarContents = () => {

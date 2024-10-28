@@ -23,7 +23,7 @@ interface Attendee {
 interface EventCardProps {
   id: number
   title: string
-  date: Date
+  date?: Date
   time: string
   description: string
   location: string
@@ -82,7 +82,7 @@ export default function EventCard({ id, title, date, time, description, location
           <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>
-              {format(date, "MMMM d, yyyy")}
+              {format(date ?? new Date(), "MMMM d, yyyy")}
               <p>Time: {time}</p>
               <p className="text-sm text-muted-foreground">
                 Location: {location}
